@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DP-700 Practice Exam & Quiz Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="brand">
+      <div class="brand-icon">DP</div>
+      <div class="brand-text">
+        <h1>DP-700 Practice Hub</h1>
+        <p>Implementing Data Analytics Solutions Using Microsoft Fabric</p>
+      </div>
+    </div>
+    
+    <div class="nav-controls">
+      <div class="mode-badge">
+        <span>⏱️ Thời gian:</span>
+        <span id="timerText">00:00</span>
+      </div>
+
+      <select id="modeSelect" class="mode-badge" style="background: var(--bg-card); cursor: pointer;">
+        <option value="practice">⚡ Chế độ: Luyện tập (Có ngay đáp án)</option>
+        <option value="exam">📝 Chế độ: Thi thử (Ẩn đáp án)</option>
+      </select>
+
+      <button id="themeToggle" class="btn-icon" title="Đổi giao diện">☀️</button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Progress Header -->
+      <div class="progress-card">
+        <div class="progress-header">
+          <span id="progressCountText">Câu 1 trên 117</span>
+          <span id="answeredCountText">0/117 câu đã trả lời</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div id="progressBarFill" class="progress-bar-fill"></div>
+        </div>
+      </div>
+
+      <!-- Question Card -->
+      <div class="question-card">
+        <div class="q-header">
+          <div id="qTitle" class="q-number">Question 1</div>
+          <div class="q-actions">
+            <button id="bookmarkBtn" class="btn-bookmark">☆ Đánh dấu</button>
+          </div>
+        </div>
+
+        <div id="qText" class="q-text">Đang tải câu hỏi...</div>
+
+        <div id="optionsList" class="options-list">
+          <!-- Options dynamically rendered -->
+        </div>
+
+        <!-- Explanation Box -->
+        <div id="explanationBox" class="explanation-box">
+          <div class="exp-title">💡 Giải thích & Đáp án chi tiết:</div>
+          <div id="expContent" class="exp-content"></div>
+        </div>
+
+        <!-- Question Footer Controls -->
+        <div class="q-footer">
+          <button id="prevBtn" class="btn btn-secondary">← Câu trước</button>
+          
+          <div style="display: flex; gap: 0.75rem;">
+            <button id="submitBtn" class="btn btn-success">🏁 Nộp bài & Chấm điểm</button>
+            <button id="nextBtn" class="btn btn-primary">Câu tiếp →</button>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Sidebar Matrix Navigator -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <span>Danh sách 118 câu</span>
+          <button id="restartBtn" class="filter-tag" style="background: var(--accent-rose); color: white; border: none;">Làm lại</button>
+        </div>
+
+        <div class="filter-tags">
+          <button class="filter-tag active" data-filter="all">Tất cả</button>
+          <button class="filter-tag" data-filter="answered">Đã làm</button>
+          <button class="filter-tag" data-filter="unanswered">Chưa làm</button>
+          <button class="filter-tag" data-filter="bookmarked">Đã dấu</button>
+          <button class="filter-tag" data-filter="wrong">Làm sai</button>
+        </div>
+
+        <div id="matrixGrid" class="matrix-grid">
+          <!-- Matrix buttons 1-117 dynamically generated -->
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Score Summary Modal -->
+  <div id="resultModal" class="modal-backdrop">
+    <div class="modal-card">
+      <h2>🎉 Kết quả Bài thi thử DP-700</h2>
+      <p style="color: var(--text-secondary);">Chúc mừng bạn đã hoàn thành bài luyện tập!</p>
+
+      <div id="scoreCircle" class="score-circle">
+        <div class="score-circle-inner">
+          <div id="modalScore" class="score-value">0/117</div>
+          <div id="modalPercent" class="score-percent">0%</div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div id="modalCorrect" class="stat-val" style="color: var(--accent-emerald);">0</div>
+          <div class="stat-label">Số câu đúng</div>
+        </div>
+        <div class="stat-item">
+          <div id="modalWrong" class="stat-val" style="color: var(--accent-rose);">0</div>
+          <div class="stat-label">Số câu sai</div>
+        </div>
+        <div class="stat-item">
+          <div id="modalSkipped" class="stat-val" style="color: var(--text-muted);">0</div>
+          <div class="stat-label">Bỏ qua</div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
+        <button id="closeModalBtn" class="btn btn-primary" style="flex: 1;">Xem lại bài làm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Data and Application Logic -->
+  <script src="questions_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
