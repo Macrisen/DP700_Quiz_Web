@@ -3327,15 +3327,8 @@ const quizData = [
       {
         "type": "image",
         "value": "images/image32.png"
-      },
-      {
-        "type": "text",
-        "value": "default()"
-      },
-      {
-        "type": "text",
-        "value": "Partial()"
       }
+
     ],
     "options": [],
     "images": [
@@ -7534,10 +7527,6 @@ const quizData = [
       {
         "type": "text",
         "value": "NOTE: Each correct selection is worth one point."
-      },
-      {
-        "type": "text",
-        "value": "Yes No No"
       }
     ],
     "options": [],
@@ -9546,18 +9535,6 @@ const quizData = [
       {
         "type": "image",
         "value": "images/image82.png"
-      },
-      {
-        "type": "text",
-        "value": "LEFT OUTER JOIN"
-      },
-      {
-        "type": "text",
-        "value": "INNER JOIN"
-      },
-      {
-        "type": "text",
-        "value": "IsActive = 1"
       }
     ],
     "options": [],
