@@ -29,6 +29,20 @@ function loadSavedState() {
 
   const savedIndex = localStorage.getItem('dp700_current_idx');
   if (savedIndex) currentQuestionIndex = parseInt(savedIndex) || 0;
+
+  const savedOrder = localStorage.getItem('dp700_order');
+  if (savedOrder) {
+    try {
+      const orderIds = JSON.parse(savedOrder);
+      const orderMap = new Map();
+      orderIds.forEach((id, index) => orderMap.set(id, index));
+      quizData.sort((a, b) => {
+        const idxA = orderMap.has(a.id) ? orderMap.get(a.id) : Infinity;
+        const idxB = orderMap.has(b.id) ? orderMap.get(b.id) : Infinity;
+        return idxA - idxB;
+      });
+    } catch(e) {}
+  }
 }
 
 function saveState() {
@@ -36,6 +50,9 @@ function saveState() {
   localStorage.setItem('dp700_bookmarks', JSON.stringify(Array.from(bookmarkedQuestions)));
   localStorage.setItem('dp700_mode', quizMode);
   localStorage.setItem('dp700_current_idx', currentQuestionIndex);
+
+  const orderIds = quizData.map(q => q.id);
+  localStorage.setItem('dp700_order', JSON.stringify(orderIds));
 }
 
 function initUI() {
@@ -73,6 +90,7 @@ function initUI() {
   document.getElementById('bookmarkBtn').addEventListener('click', toggleBookmark);
   document.getElementById('submitBtn').addEventListener('click', showSubmitConfirmation);
   document.getElementById('restartBtn').addEventListener('click', restartQuiz);
+  document.getElementById('shuffleBtn').addEventListener('click', shuffleQuestions);
   document.getElementById('closeModalBtn').addEventListener('click', closeModal);
 }
 
@@ -570,6 +588,20 @@ function restartQuiz() {
     saveState();
     closeModal();
     renderQuestion(0);
+    renderMatrix();
+  }
+}
+
+function shuffleQuestions() {
+  if (confirm('Bạn có chắc chắn muốn đảo ngẫu nhiên thứ tự tất cả các câu hỏi? Các câu đã trả lời sẽ vẫn được giữ nguyên.')) {
+    // Thuật toán xáo trộn Fisher-Yates
+    for (let i = quizData.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [quizData[i], quizData[j]] = [quizData[j], quizData[i]];
+    }
+    currentQuestionIndex = 0;
+    saveState();
+    renderQuestion(currentQuestionIndex);
     renderMatrix();
   }
 }
