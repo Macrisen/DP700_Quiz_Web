@@ -1,10 +1,10 @@
-# DP700 Quiz App
+# DP700 Quiz Web
 
 A simple and interactive web-based Quiz Application built with HTML, CSS, and Vanilla JavaScript.
 
 ## 🚀 Live Demo
 
-**[Play the Quiz App Here!](https://macrisen.github.io/DP700_Quiz_App/)**
+**[Play the Quiz Web Here!](https://macrisen.github.io/DP700_Quiz_App/)**
 
 ## 🛠️ Technologies Used
 
